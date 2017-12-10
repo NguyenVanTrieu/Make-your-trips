@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+  <script src="dist/js/adminlte.min.js"></script>
+
+  <style type="text/css">
+    #pac-input{
+      position: absolute;
+      margin-left: 45px;
+      width: 500px;
+      height: 50px;
+      border-radius:0 5px 5px 0;
+    }
+  </style>
+
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <header class="main-header">
+    <a class="logo">
+      <span class="logo-mini"><b>@</b></span>
+      <span class="logo-lg"><b>Xây dựng tiến trình</b></span>
+    </a>
+    <nav class="navbar navbar-static-top">
+      <input id="pac-input" class="form-control" type="text" placeholder="Enter a location">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+        <li class="dropdown user user-menu label-success">
+            <a href="#">
+              <i></i>
+              <span>Khu vui chơi</span>
+            </a>
+           </li>
+        <li class="dropdown user user-menu label-warning">
+            <a href="#">
+              <i></i>
+              <span class="hidden-xs">Nhà hàng</span>
+            </a>
+           </li>
+        <li class="dropdown user user-menu label-danger">
+            <a href="#">
+              <i></i>
+              <span class="hidden-xs">Khách sạn</span>
+            </a>
+           </li>
+          <li class="dropdown user user-menu">
+            <a href="#">
+            	<i></i>
+             	<span class="hidden-xs">Về trang chính</span>
+            </a>
+           </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Phuong</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">QUẢN LÝ TIẾN TRÌNH</li>
+        <li>
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Tuyến đường</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-th"></i> <span>Thêm địa điểm ăn uống</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 1</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 2</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 3</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-gears"></i> <span>Địa điểm vui chơi</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 1</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 2</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 3</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-gears"></i> <span>Khách sạn</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 1</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 2</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 3</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </aside>
+
+  <div class="content-wrapper" id="map"></div>
+
+</div>
+</body>
+ <script>
+    var map;
+    var markers = [];
+    var searchLocation;
+    var infowindow;
+    var service;
+     function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 17
+        });
+
+        var card = document.getElementById('pac-card');
+        var input = document.getElementById('pac-input');
+        var findMe = document.getElementById('findMe');
+        var findHotel = document.getElementById('findHotel');
+        var thoitiet = document.getElementById('thoitiet');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(findMe);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(findHotel);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(thoitiet);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+          map: map,
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+          }
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+          var address = '';
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+          infowindowContent.children['place-icon'].src = place.icon;
+          infowindowContent.children['place-name'].textContent = place.name;
+          infowindowContent.children['place-address'].textContent = address;
+          infowindow.open(map, marker);
+          markers.push(marker);
+          searchLocation = place.geometry.location;
+        });
+    }
+    // kết thúc tự động điền mà tìm kiếm
+    // Xác định vị chí của mình
+      var latitude=null;
+      var longitude=null;
+        function FindMe(){
+        if (latitude==null&&longitude==null) {
+          if(navigator.geolocation){
+            navigator.geolocation.watchPosition(selectMyPosition);
+          }
+        }
+        else{
+          map.setCenter({lat:latitude, lng:longitude});
+        }
+      }
+      function selectMyPosition(position){
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        var myLatlng = new google.maps.LatLng(latitude,longitude);
+        map.setZoom(17);
+        map.setCenter({lat:latitude, lng:longitude});
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title:"I am Here !"
+        });
+        markers.push(marker);
+      }
+      // Kết thúc xác định vị chí cửa bạn
+      // Tìn thồng tin địa điểm xung quanh vị chí tìm kiếm
+      function searchObjectnearLocaltion(type){
+            var request = {
+              location: searchLocation,
+              radius: 500,
+              type: ['hotel']
+          }
+          infowindow = new google.maps.InfoWindow();
+          service = new google.maps.places.PlacesService(map);
+          service.nearbySearch(request, callback);
+      }
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            results.forEach(createMarker);
+          }
+      }
+
+       function createMarker(place) {
+          var placeLoc = place.geometry.location;
+          var marker = new google.maps.Marker({
+              map: map,
+              position: place.geometry.location
+          });
+          marker.addListener('click', function() {
+
+            var request = {
+                reference: place.reference
+            };
+            service.getDetails(request, function(details, status) {
+              infowindow.setContent([
+                details.name,
+                details.formatted_address,
+                details.website,
+                details.rating,
+                details.formatted_phone_number,
+                "<form method='post'><input class='form-control' type='text' name='txt'></br><input type='button' class='btn' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='sendData()'></form>"].join("<br/>"));
+              infowindow.open(map, marker);
+            });
+
+          })
+      }
+
+      // kết thúc tìm thông tin liên quan
+      // Thời tiết fade in/out
+      var n = 0;
+      function fadeIOIFrame(){
+        var fadeIOthoitiet = document.getElementById('fadeIO-thoitiet');
+        if(n==0){
+          fadeIOthoitiet.innerHTML = "<i class='glyphicon glyphicon-chevron-down'></i>";
+          document.getElementById('iframe-thoitiet').style.display = 'none';
+          n++;
+        }else{
+          fadeIOthoitiet.innerHTML = "<i class='glyphicon glyphicon-chevron-up'></i>";
+          document.getElementById('iframe-thoitiet').style.display = 'block';
+          n--;
+        }
+      }
+
+     function sendData(){
+        alert('ok');
+     }
+    </script>
+     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEn8DqcOIU6VdZit9-RPhWrjyGoaFWksc&language=vi&libraries=places&callback=initMap"></script>
+</html>
