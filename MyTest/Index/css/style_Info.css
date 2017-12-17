@@ -597,7 +597,10 @@ ul.w8-tabs:after {
   border-bottom: 1px solid #e0e0e0;
 }
 .section-logo {
-  margin-top: 18px;
+  margin: 9px 0px;
+}
+.section-logo img{
+  width: 50px;
 }
 ul#id_menu {
   list-style: none outside none;
