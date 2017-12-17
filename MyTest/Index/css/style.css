@@ -185,17 +185,17 @@ border: none;
 	width:50%;
 }
 #headerwrap #btnsearch{
-	font-family:  'Roboto', 'sans-serif';
+	font-family:  Roboto;
 	color: #fff;
-	width: 185px;
+	width: 145px;
 	height: 2.9em;
 	font-size: 1.3125em; /* 21px */
 	padding:0.6em 0.7em 1em 0.7em;
 	letter-spacing: 0.05em;
-	margin: 0;
+	margin: 0;	
 	border: 0;
 	text-transform: none;
-	background: #f0bf00 !important;
+	background: #1fcdff !important;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -291,13 +291,13 @@ border: none;
 }
 .pretty .gall .readmore{
 	position: absolute;
+	overflow: hidden;
 	z-index: 10;
 	margin-top: 25%;
 	border:0px;
 	width: 356px;
 	height: 60px;
-	background-color: #000;
-	opacity: 0.7;
+	background-color: rgba(000,000,000,0.7);
 	text-decoration: none;
 	color: #fff;
 	display: none;
@@ -308,11 +308,16 @@ border: none;
 	font-family:  'Roboto', 'sans-serif';
 }	
 .pretty .gall .readmore:hover{
-	color:  yellow;
+	color:  #fff;
+	background: rgba(31,205,255,0.7);
 }	
 @keyframes readmore {
-    from {margin-top: 55%;}
-    to {margin-top: 25%;}
+    0% {
+	    transform: scale(.3);
+	}
+	100% {
+	    transform: scale(1);
+	}
 }
 .pretty .gall:hover .readmore{
 	display: block;
