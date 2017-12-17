@@ -4,12 +4,15 @@
 		<title>Make-Trips</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700|Open+Sans:700' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="js/jquery.mobile.customized.min.js"></script>
 		<script src="js/sorting.js" type="text/javascript"></script>
 		<script src="js/jquery.isotope.js" type="text/javascript"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+
 	</head>
 	<body>
     
@@ -21,7 +24,7 @@
 				<div class="logo col-md-4">
 					<div>
 						<a href="#">
-							<img src="images/logo.png">
+							<img src="images/25488551_912099565604987_80347706_n.jpg">
 						</a>
 					</div>
 				</div>
@@ -29,7 +32,7 @@
 					<div class="navmenu"style="text-align: center;">
 						<ul id="menu">
 							<li>
-					          	<a href="#" onclick="fadeLogin()"><b>Login</b> <span class="caret"></span></a>
+					          	<a style="cursor: pointer;" onclick="fadeLogin()"><b>Login</b> <span class="caret"></span></a>
 								<ul id="login-dp" class="dropdown-menu">
 									<li>
 										<div class="row">
@@ -56,13 +59,11 @@
 					<div id="headerwrap">
 				      	<div class="container">
 					        <div class="row">
-					        <h3>Tìm kiếm lơi thuộc về bạn !</h3>
+					        <h3>Tìm kiếm nơi thuộc về bạn !</h3>
 					          <div class="span12">
-					          	<form method="get" id="form_search"">
-						            <input type="text" name="key" id="key" placeholder="Nhập nơi bạn muốn đi du lịch" class="cform-text" size="40">
-						            <span id="btnsearch">Search <img src="images/search.png" width="35px"></span>
-
-						            
+					          	<form method="get" class="ui-widget">
+						            <input type="text" name="key" id="key" class="" required="required" placeholder="Nhập nơi bạn muốn đi du lịch" class="cform-text" size="40">
+						            <span id="btnsearch">Tìm kiếm <img src="images/search.png" width="35px"></span>
 					            </form>
 					          </div>
 					        </div>
@@ -76,15 +77,15 @@
 		<div class="row">
 				<div id="options" class="col-md-12" style="text-align: center;">	
 					<ul id="filter" class="option-set" data-option-key="filter">
-						<li><a class="selected" href="#filter" data-option-value="*" class="current">All</a></li>
-						<li><a href="#filter" data-option-value=".eating">Eating</a></li>
-						<li><a href="#filter" data-option-value=".playing">Playing</a></li>
-						<li><a href="#filter" data-option-value=".drive">Drive</a></li>
+						<li><a class="selected" href="#filter" data-option-value="*" class="current">Tất cả</a></li>
+						<li><a href="#filter" data-option-value=".eating">Ăn uống</a></li>
+						<li><a href="#filter" data-option-value=".playing">Vui chơi</a></li>
+						<li><a href="#filter" data-option-value=".drive">Ngắm cảnh</a></li>
 					</ul>
 				</div>
 			<div class="portfolio_block pretty" data-animated="fadeIn">	
 					<div class="element col-sm-4   gall playing">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic1.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic1.jpg" alt="pic1 Gallery"/>
 						</a>
@@ -98,7 +99,7 @@
 						</div>
 					</div>
 					<div class="element col-sm-4  gall playing">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic2.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic2.jpg" alt="pic2 Gallery"/>
 						</a>
@@ -112,7 +113,7 @@
 						</div>
 					</div>
 					<div class="element col-sm-4  gall drive">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic3.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic3.jpg" alt="pic3 Gallery"/>
 						</a>
@@ -127,7 +128,7 @@
 					</div>	
 					
 					<div class="element col-sm-4  gall  text_styles">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic4.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic4.jpg" alt="pic1 Gallery"/>
 						</a>
@@ -141,7 +142,7 @@
 						</div>
 					</div>
 					<div class="element col-sm-4  gall  drive">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic5.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic5.jpg" alt="pic1 Gallery"/>
 						</a>
@@ -155,7 +156,7 @@
 						</div>
 					</div>
 					<div class="element col-sm-4  gall  eating">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic6.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic6.jpg" alt="pic1 Gallery"/>
 						</a>
@@ -169,7 +170,7 @@
 						</div>
 					</div>		
 					<div class="element col-sm-4   gall playing">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic7.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic7.jpg" alt="pic1 Gallery"/>
 						</a>
@@ -184,7 +185,7 @@
 					</div>
 					
 					<div class="element col-sm-4  gall text_styles">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic8.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic8.jpg" alt="pic1 Gallery"/>
 						</a>
@@ -199,7 +200,7 @@
 					</div>
 					
 					<div class="element col-sm-4  gall eating">
-						<a class="readmore" href="info.html">Read More</a>
+						<a class="readmore" href="info.html">Chi tiết</a>
 						<a class="plS" href="images/prettyPhotoImages/pic9.jpg" rel="prettyPhoto[gallery2]">
 							<img class="img-responsive picsGall" src="images/prettyPhotoImages/thumb_pic9.jpg" alt="pic1 Gallery"/>
 						</a>
@@ -214,11 +215,12 @@
 					</div>			
 				</div>
 			</div>
+			<center><a href="">Xem thêm</a></center>
 		</div>
-		 <div class="lineBlack">
+		<div class="lineBlack">
 			<div class="container">
 				<div class="row downLine">
-					<div class="col-md-6 text-left copy"></div>
+					<div class="col-md-6"></div>
 					<div class="col-md-6 text-right dm">
 						<p>Copyright &copy; Chuyên đi copy code !</p>
 					</div>
@@ -239,11 +241,4 @@
 			n--;
 		}
 	}
-	$(document).ready(function()
-	{	
-		//sử dụng autocomplete với input có id = key
-		$( "#cities" ).autocomplete({
-	        source:'search.php', //link xử lý dữ liệu tìm kiếm
-	    })
-	});
 </script>
