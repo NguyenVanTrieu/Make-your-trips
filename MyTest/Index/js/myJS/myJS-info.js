@@ -11,6 +11,8 @@ function initMap() {
   });
   google.maps.event.addListener(map,'click', function(event) {
       addMarker(event.latLng);
+      latitude = event.latLng.lat();
+      longitude = event.latLng.lng();
   });
   var marker = new google.maps.Marker({
     map: map,
@@ -23,7 +25,9 @@ function initMap() {
   document.getElementById('showKC').addEventListener('click', onChangeHandler);
 }
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-  FindMe();
+  if(latitude==null && longitude==null){
+    FindMe();
+  };
   directionsService.route({
     origin: {lat: latitude, lng: longitude},
     destination: {lat: 20.996004, lng: 105.808000},
@@ -42,6 +46,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     }
   });
 }
+
 function FindMe(){
   if (latitude==null&&longitude==null) {
     if(navigator.geolocation){
@@ -53,18 +58,32 @@ function FindMe(){
   }
 }
 function addMarker(location) {
-    var marker = new google.maps.Marker({
-        position: location,
-        draggable: true,
-        animation: google.maps.Animation.DROP,
-        map: map
-    });
-    markers.push(marker);
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  var marker = new google.maps.Marker({
+    position: location,
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    map: map
+  });
+  markers.push(marker);
 }
 function selectMyPosition(position){
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
+  latitude = position.coords.latitude;
+  longitude = position.coords.longitude;
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  var marker = new google.maps.Marker({
+    position: {lat: latitude,lng: longitude},
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    map: map
+  });
+  markers.push(marker);
 }
+
 function goToThisLocation(){
   map.setCenter({lat: 20.996004, lng: 105.808000});
 }
