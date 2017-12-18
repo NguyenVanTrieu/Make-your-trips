@@ -2,3 +2,27 @@
 .text-heart{color: #fd5f5b;}
 .text-eye{color: #6a60f7;}
 #id_register_a{padding: -60px !important;}
+#login-dp{
+    min-width: 240px;
+    padding: 14px 0;
+    overflow:hidden;
+    background-color:rgba(000,000,000,.8);
+    position: absolute;	
+    margin-left: -80px;
+    margin-top: -15px;
+}
+#title-Login{
+	border: 0px !important;
+	color: #fff;
+	text-align: center !important;
+}
+#login-dp a{
+	color: #fff !important;
+	float: left;
+	width: 100px !important;
+	padding: 10px !important;
+	margin: 5px !important;
+}
+#btn-start{
+	padding: 30px 0px;
+}

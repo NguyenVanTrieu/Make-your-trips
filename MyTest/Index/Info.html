@@ -9,13 +9,13 @@
 	<link href="css/style-switcher.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/myCSS/myCSS-info.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body>
 
 
 <div class="full_100">
 	<div class="full_box">
-		
 		<!-- header section -->
 		<div class="header_section fixed">
 			<div class="id-header">
@@ -24,14 +24,29 @@
 						<div class="col-md-3">
 							<!-- logo -->
 							<div class="section-logo">
-								<img src="images/logo.png" alt="" />
+								<img src="images/logo.png" alt="">
 							</div>
 							<!-- logo ends -->
 						</div>
 						<div class="col-md-9">
 							<!-- menu -->
 							<ul id="id_menu" class="nav pull-right">
-								<li><a href="#id_slider_big" title="">HOME</a></li>
+								<li>
+									<a onclick="fadeLogin()" href="#id_slider_big" title="">Đăng nhập</a>
+									<ul id="login-dp" class="dropdown-menu">
+										<li id="title-Login">
+											<div class="row">
+												<div class="col-md-12">
+													<b>Đăng nhập với</b>
+													<div class="social-buttons">
+														<a href="#" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
+														<a href="#" class="btn btn-danger"><i class="fa fa-google-plus"></i> Google+</a>
+													</div>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</li>
 							</ul>
 							<!-- menu ends -->
 						</div>
@@ -67,12 +82,9 @@
 										<div class="slider-info">
 											<div class="slider-info-div	">
 												<div class="s-where">
-													<div><i class="s-date">Địa chỉ</i></div>
-													<div><i class="s-location">Thể loại của địa điểm</i></div>
+													<div class="s-title"><h1>Tên địa điểm</h1></div>
+													<div class="s-location">Có <b>123</b> người thích địa điểm này</div>
 													<div class="s-where-line"></div>
-												</div>
-												<div class="s-title">
-													<h1>Tiêu đề</h1>
 												</div>
 												<div class="s-content">
 													<p class="first-p">Giới thiệu về địa điểm</p>
@@ -103,8 +115,9 @@
 								<!-- heading -->
 								<div class="wow fadeIn" data-wow-delay="0.2s">
 									<div class="heading-container">
-										<h2 class="heading-title">MỘT SỐ THÔNG TIN</h2>
-										<span class="heading-subtitle">Về hình ảnh và các bài viết liên quan</span>
+										<h2 class="heading-title">TIÊU DỀ BÀI VIẾT</h2>
+										<span class="heading-subtitle"><h3>Địa chỉ bài viết</h3></span>
+										<span class="heading-subtitle">Giới thiệu chi tiết Tuy nhiên, bà nhìn nhận nói thì dễ nhưng qua nhiều vụ việc cụ thể của UB Kiểm tra TƯ mới thấy ở dưới cơ sở không đơn giản chút nào. Thấy cái đúng để bảo vệ cũng không dám, sai không dám đấu tranh. Chuyện này chính là của Mặt trận, cán bộ mặt trận tác động toàn dân thế nào, khen thưởng ra sao để khơi dậy phong trào rất quan trọng.</span>
 									</div>
 								</div>
 								<!-- heading ends -->
@@ -158,19 +171,44 @@
 												<h3>Các bài viết về địa điểm này</h3>
 												<div class="wa-list-check left">
 													<ul>
-														<li><a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a></li>
-														<li><a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a></li>
-														<li><a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a></li>
-														<li><a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a></li>
-														<li><a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a></li>
-														<li><a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a></li>
-														<li><a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a></li>
+														<li>
+															<a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a>
+															<span class="label label-success" title="Nguồn bài viết"> Nguồn bài viết</span>
+														</li>
+														<li>
+															<a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a>
+															<span class="label label-success" title="Nguồn bài viết"> Nguồn bài viết</span>
+														</li>
+														<li>
+															<a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a>
+															<span class="label label-success" title="Nguồn bài viết"> Nguồn bài viết</span>
+														</li>
+														<li>
+															<a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a>
+															<span class="label label-success" title="Nguồn bài viết"> Nguồn bài viết</span>
+														</li>
+														<li>
+															<a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a>
+															<span class="label label-success" title="Nguồn bài viết"> Nguồn bài viết</span>
+														</li>
+														<li>
+															<a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a>
+															<span class="label label-success" title="Nguồn bài viết"> Nguồn bài viết</span>
+														</li>
+														<li>
+															<a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a>
+															<span class="label label-success" title="Nguồn bài viết"> Nguồn bài viết</span>
+														</li>
+														<li>
+															<a href="#">Nunc ullamcorper lobortis tortor, eget eleifend erat placerat ac.</a>
+															<span class="label label-success" title="Nguồn bài viết"> Nguồn bài viết</span>
+														</li>
 													</ul>
 												</div>
 												<div class="wa-event-padding-button">
 												</div>
 												<div class="localScroll">
-													<a class="wa-button" href="#id_register_a"><span>GO NOW</span></a>
+													<a class="wa-button" href="#id_register_a"><span>Đi thôi</span></a>
 												</div>
 												
 											</div>
@@ -237,29 +275,17 @@
 			<!--  Maps ends -->
 			
 			<!--  button bắt đầu xây duwg lịch trình start -->
-			<div id="id_register_a" class="bg_1">
+			<div id="btn-start" class="bg_1">
 				<div class="container">
-					<div class="row">
-						<div class="col-md-3"></div>
-						<div class="col-md-6">
-							<!-- wa-big-element-->
-							<div class="wa-big-element">
-								<div class="wow fadeIn">
-									<!-- FORM -->
-									<form class="form-register">
-										<div class="row">
-											<div class="col-md-12">
-												<button>Tạo lịch trình của bạn</button>
-											</div>
-										</div>
-									</form>
-									<!-- FORM ENDS -->
-								</div>
+					<form class="form-register">
+						<div class="row">
+							<div class="col-md-2"></div>
+							<div class="col-md-8">
+								<button>Tạo lịch trình của bạn</button>
 							</div>
-							<!-- wa-big-element ends -->
+							<div class="col-md-2"></div>
 						</div>
-						<div class="col-md-3"></div>
-					</div>
+					</form>
 				</div>
 			</div>
 			<!--  button bắt đầu xây duwg lịch trình ends -->
@@ -487,5 +513,15 @@
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
     }
+    var n=0;
+    function fadeLogin(){
+	    if(n==0){
+	        $('#login-dp').fadeIn(300);
+	        n++;
+	    }else{
+	        $('#login-dp').fadeOut(300);
+	        n--;
+	    }
+	}
 </script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEn8DqcOIU6VdZit9-RPhWrjyGoaFWksc&language=vi&libraries=places&callback=initMap"></script>
