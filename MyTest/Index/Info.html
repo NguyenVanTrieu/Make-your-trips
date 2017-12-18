@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Sujib | Event Landing Page HTML Template</title>
+	<title>Chi tiết</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<link href="css/vendor.css" rel="stylesheet" />
 	<link href="css/style_Info.css" rel="stylesheet" />
 	<link href="css/style-switcher.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/myCSS/myCSS-info.css">
 </head>
 <body>
 
@@ -30,7 +32,6 @@
 							<!-- menu -->
 							<ul id="id_menu" class="nav pull-right">
 								<li><a href="#id_slider_big" title="">HOME</a></li>
-								<li><a href="#id_register_a" title="">REGISTER</a></li>
 							</ul>
 							<!-- menu ends -->
 						</div>
@@ -46,15 +47,10 @@
 			<!-- slider start -->
 			<div id="id_slider_big">
 				<div class="wa-slider-container">
-				
 					<!-- slider background -->
 					<div class="wa-slider-bg">
-						<div class="cycle-slideshow"
-						data-cycle-slides=">img"
-						data-cycle-auto-height="container">
+						<div class="cycle-slideshow">
 							<img src="images/slider/main_img_1.jpg"  data-cycle-fx=tileSlide data-cycle-tile-vertical=false alt="" />
-							<img src="images/slider/main_img_2.jpg"  data-cycle-fx=tileBlind data-cycle-tile-count=12 alt="" />
-							<img src="images/slider/main_img_3.jpg" data-cycle-fx=tileSlide data-cycle-tile-count=12 alt="" />
 						</div>
 					</div>
 					<!-- slider background ends -->
@@ -88,14 +84,11 @@
 										</div>
 									</div>
 								</div>
-								
 								<div class="clearfix"></div>
-								
 							</div>
 						</div>
 					</div>
 					<!-- slider front ends -->
-					
 				</div>
 			</div>
 			<!-- slider ends -->
@@ -194,48 +187,49 @@
 			<!-- about ends -->
 			<!-- divider -->
 			<div class="wa-divider-1"></div>
-			<div class="wa-divider"></div>
 			<!-- divider ends -->
-			
 			<!-- Maps start -->
 			<div class="wa-flying-top">
 				<div id="id_location_a">
-				
 					<div class="wa-map-container">
-						<!-- maps -->
-						<div id="map" style="width: 100%; height: 650px;"></div>
-						<!-- maps ends-->
-						
-						<!-- info -->
-						<div class="wa-map-info">
-							<div class="container">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="wa-map-info-container">
-											
+						<div class="container">
+							<!-- maps -->
+							<div id="map"></div>
+							<!-- maps ends-->
+							
+							<!-- info -->
+							<div class="wa-map-info">
+								<div class="container">
+									<div class="row">
+										<div class="col-md-1"></div>
+										<div class="col-md-10">
+											<div class="wa-map-info-container">
 												<div class="col-1-4">
+													<img class="d-1" src="images/678111-map-marker-48.png" title="click để tìm đại điểm du lịch đã chọn">
 													<div class="d-2">
 														<span class="s-1">Địa chỉ thăm quan</span><br />
 														<span class="s-2">địa chỉ ở đây</span>
 													</div>
 												</div>
 												<div class="col-1-4">
+													<img class="d-1" src="images/678111-map-marker-48.png" title="click để biết vị trí của bạn">
 													<div class="d-2">
 														<span class="s-1">Khoảng cách tới vị trí của bạn</span><br />
-														<span class="s-2" id="kc">Bấm tìm vị trí để biết</span>														
+														<span class="s-2" id="kc">Bấm tìm vị trí để biết</span>		
 													</div>
 												</div>
 												<div class="col-1-4">
-													<button class="wa-button" id="showKC"><span>Tìm vị trí của bạn</span></button>
+													<button class="wa-button" id="showKC"><span>Tính khoảng cách</span></button>
 												</div>
 												<div class="clearfix"></div>
-											
+											</div>
 										</div>
+										<div class="col-md-1"></div>
 									</div>
 								</div>
 							</div>
+							<!-- info -->
 						</div>
-						<!-- info -->
 					</div>
 				
 				</div>
@@ -246,7 +240,8 @@
 			<div id="id_register_a" class="bg_1">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-3"></div>
+						<div class="col-md-6">
 							<!-- wa-big-element-->
 							<div class="wa-big-element">
 								<div class="wow fadeIn">
@@ -263,6 +258,7 @@
 							</div>
 							<!-- wa-big-element ends -->
 						</div>
+						<div class="col-md-3"></div>
 					</div>
 				</div>
 			</div>
@@ -294,8 +290,8 @@
 													</div>
 													<div class="wa-pricing-content">
 														<ul>
-															<li>Số lượng người đã xem</li>
-															<li>số lượng người thích</li>
+															<li class="text-eye"><i class="fa fa-eye"></i>&nbsp; Đã xem: &nbsp;<b>131231</b></li>
+															<li class="text-heart"><i class="fa fa-heart"></i>&nbsp; Ưa thích: &nbsp;<b>131231</b></li>
 														</ul>
 													</div>
 													<div class="wa-pricing-button localScroll">
@@ -321,8 +317,8 @@
 													</div>
 													<div class="wa-pricing-content">
 														<ul>
-															<li>Số lượng người đã xem</li>
-															<li>số lượng người thích</li>
+															<li class="text-eye"><i class="fa fa-eye"></i>&nbsp; Đã xem: &nbsp;<b>131231</b></li>
+															<li class="text-heart"><i class="fa fa-heart"></i>&nbsp; Ưa thích: &nbsp;<b>131231</b></li>
 														</ul>
 													</div>
 													<div class="wa-pricing-button localScroll">
@@ -348,8 +344,8 @@
 													</div>
 													<div class="wa-pricing-content">
 														<ul>
-															<li>Số lượng người đã xem</li>
-															<li>số lượng người thích</li>
+															<li class="text-eye"><i class="fa fa-eye"></i>&nbsp; Đã xem: &nbsp;<b>131231</b></li>
+															<li class="text-heart"><i class="fa fa-heart"></i>&nbsp; Ưa thích: &nbsp;<b>131231</b></li>
 														</ul>
 													</div>
 													<div class="wa-pricing-button localScroll">
@@ -375,8 +371,8 @@
 													</div>
 													<div class="wa-pricing-content">
 														<ul>
-															<li>Số lượng người đã xem</li>
-															<li>số lượng người thích</li>
+															<li class="text-eye"><i class="fa fa-eye"></i>&nbsp; Đã xem: &nbsp;<b>131231</b></li>
+															<li class="text-heart"><i class="fa fa-heart"></i>&nbsp; Ưa thích: &nbsp;<b>131231</b></li>
 														</ul>
 													</div>
 													<div class="wa-pricing-button localScroll">
@@ -407,7 +403,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-						<div class="footer-text">2014 Sujib - Event Landing Page | Design by <a href="http://www.themeforest.net/user/wpamanuke" title="">WPAmaNuke</a></div>
+						<div class="footer-text">Copyright 2017 &copy; Thiết kế và lập trình bởi sinh viên ĐH Khoa Học Tự Nhiên!</div>
 					</div>
 				</div>
 			</div>		
