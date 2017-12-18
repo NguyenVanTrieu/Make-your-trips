@@ -954,6 +954,7 @@ ul#id_menu .flexMenu-popup a:hover {
   width: 33.3333%;
   float: left;
   padding: 20px 10px;
+  cursor: pointer;
 }
 #id_location_a .wa-map-container .wa-map-info .wa-map-info-container .col-1-4 .d-1 {
   float: left;
