@@ -2,7 +2,9 @@ var map;
 var markers = [];
 var latitude=null;
 var longitude=null;
+var geocoder;
 function initMap() {
+  geocoder = new google.maps.Geocoder();
 	var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
   map = new google.maps.Map(document.getElementById('map'), {
@@ -11,6 +13,19 @@ function initMap() {
   });
   google.maps.event.addListener(map,'click', function(event) {
       addMarker(event.latLng);
+      geocoder.geocode( { 'location': event.latLng}, function(results, status) {
+        if (status == 'OK') {
+          var address = results[0].formatted_address;
+          document.getElementById('selectAddress').title = address;
+          if(address.length >= 25){
+            var c = address.substr(0,25);
+            address = c+' ...';
+          }
+          document.getElementById('selectAddress').innerHTML = address;
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
       latitude = event.latLng.lat();
       longitude = event.latLng.lng();
   });
@@ -38,7 +53,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       //get direction info
       var htmlReturn = '';
       var route = response.routes[0];
-      htmlReturn += "Distance: <strong>" + route.legs[0].distance.text + "</strong>, Duration: <strong>" + route.legs[0].duration.text + "</strong>";
+      htmlReturn += "Khoảng: <strong>" + route.legs[0].distance.text + "</strong>, Đi trong: <strong>" + route.legs[0].duration.text + "</strong>";
       document.getElementById('kc').innerHTML  = htmlReturn;
     } 
     else {
@@ -63,7 +78,6 @@ function addMarker(location) {
   }
   var marker = new google.maps.Marker({
     position: location,
-    draggable: true,
     animation: google.maps.Animation.DROP,
     map: map
   });
