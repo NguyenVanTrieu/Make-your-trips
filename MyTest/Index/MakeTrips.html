@@ -10,32 +10,7 @@
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-  <script src="dist/js/adminlte.min.js"></script>
-
-  <style type="text/css">
-    #pac-input{
-      position: absolute;
-      margin-left: 45px;
-      width: 500px;
-      height: 50px;
-      border-radius:0 5px 5px 0;
-    }
-    #infowindow-content .title {
-      font-weight: bold;
-    }
-
-    #infowindow-content {
-      display: none;
-    }
-
-    #map #infowindow-content {
-      display: inline;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/myCSS/myCSS-maketrips.css">
 
 
 </head>
@@ -128,11 +103,21 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 1</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 2</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 3</a></li>
+          <ul class="treeview-menu sortable list">
+            <li class="disabled"><a href="#"><i class="fa fa-circle-o"></i> Bắt đầu</a><div title="Vị trí hiện tại của bạn"><i class="fa fa-bullseye fa-lg"></i></div></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 1</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 2</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 3</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 4</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 5</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 6</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
+            <br>
+            <form>
+              <input class="btn btn-success" type="submit" name="" value="Sắp xếp theo thời gian">
+              <input class="btn btn-primary" type="submit" name="" value="Lưu">
+            </form>
           </ul>
+         
         </li>
         <li class="treeview">
           <a href="#">
@@ -156,7 +141,15 @@
       <span id="place-address"></span>
   </div>
   <div class="content-wrapper" id="map"></div>
-
 </div>
 </body>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.sortable.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script type="text/javascript" src="js/myJS/myJS-maketrip.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEn8DqcOIU6VdZit9-RPhWrjyGoaFWksc&language=vi&libraries=places&callback=initMap"></script>
+
 </html>

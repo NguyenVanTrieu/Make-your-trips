@@ -1,0 +1,49 @@
+#pac-input{
+      position: absolute;
+      margin-left: 45px;
+      width: 500px;
+      height: 50px;
+      border-radius:0 5px 5px 0;
+    }
+    #infowindow-content .title {
+      font-weight: bold;
+    }
+
+    #infowindow-content {
+      display: none;
+    }
+
+    #map #infowindow-content {
+      display: inline;
+    }
+    .sortable li{
+      height: 30px;
+      width: 100%;
+    }
+    .sortable li a{
+      width: 90%;
+      float: left;
+    }
+    .sortable li div{
+      float: left;
+      width: 10%;
+      height: 100%;
+      color: #8aa4af;
+      cursor: pointer;
+      padding: 3px 0 0 2px;
+    }
+    .sortable li div:hover{
+      color: #fff;
+    }
+    .sortable li.sortable-placeholder {
+      border: 1px dashed #CCC;
+      background: none;
+    }
+    li.highlight {
+      background: #FEE25F;
+    }
+    #features {
+      margin: auto;
+      width: 460px;
+      font-size: 0.9em;
+    }
