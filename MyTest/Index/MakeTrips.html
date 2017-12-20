@@ -94,26 +94,25 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">QUẢN LÝ TIẾN TRÌNH</li>
-        <li class="treeview">
+        <li class="treeview active">
           <a href="#">
             <i class="fa fa-gears"></i> <span>Xây dựng lịch trình</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu sortable list">
-            <li class="disabled"><a href="#"><i class="fa fa-circle-o"></i> Bắt đầu</a><div title="Vị trí hiện tại của bạn"><i class="fa fa-bullseye fa-lg"></i></div></li>
+          <ul class="treeview-menu sortable list" id="myLisstLocation">
+            <li class="disabled" id="headListLocation"><a href="#"><i class="fa fa-circle-o"></i> Bắt đầu</a><div title="Vị trí hiện tại của bạn"><i class="fa fa-bullseye fa-lg"></i></div></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 1</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 2</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 3</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 4</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 5</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Địa điểm 6</a><div title="Xóa vị trí này"><i class="fa fa-times fa-lg"></i></div></li>
+            <li><a href='#''><i class='fa fa-circle-o'></i> Địa điểm 2</a><div title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>
             <br>
-            <form>
-              <input class="btn btn-success" type="submit" name="" value="Sắp xếp theo thời gian">
-              <input class="btn btn-primary" type="submit" name="" value="Lưu">
-            </form>
+            <li>
+              <form>
+                <input class="btn btn-success" type="submit" name="" value="Sắp xếp theo thời gian">
+                <input class="btn btn-primary" type="button" name="" value="Lưu">
+              </form>
+            </li>
+            <br>
           </ul>
          
         </li>
@@ -141,7 +140,7 @@
   <div class="content-wrapper" id="map"></div>
 </div>
 </body>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.sortable.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -149,5 +148,4 @@
 <script src="dist/js/adminlte.min.js"></script>
 <script type="text/javascript" src="js/myJS/myJS-maketrip.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEn8DqcOIU6VdZit9-RPhWrjyGoaFWksc&language=vi&libraries=places&callback=initMap"></script>
-
 </html>

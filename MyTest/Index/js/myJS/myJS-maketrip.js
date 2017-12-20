@@ -1,13 +1,9 @@
 var map;
-var flag = {
-          url: 'https://cdn0.iconfinder.com/data/icons/fatcow/32/flag_finish.png',
-          // This marker is 20 pixels wide by 32 pixels high.
-          size: new google.maps.Size(20, 32),
-          // The origin for this image is (0, 0).
-          origin: new google.maps.Point(0, 0),
-          // The anchor for this image is the base of the flagpole at (0, 32).
-          anchor: new google.maps.Point(0, 32)
-        };
+var lats = [];
+var longs = [];
+var times = [];
+var notes = [];
+var flag = 'https://cdn0.iconfinder.com/data/icons/fatcow/32/flag_finish.png';
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 20.996004, lng: 105.808000},
@@ -40,7 +36,14 @@ function createMarker(place) {
   });
 }
 function setContentForm(){
-  infowindow.setContent("<form method='post'><label>Tiêu đề</label><input class='form-control' type='text' name='title'><br><label>Giờ bắt đầu</label><input class='form-control' type='time' name='time'><br><label>Ghi chú</label><input class='form-control' type='text' name='txt'></br><input type='button' class='btn' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='sendData()'></form>");
+  infowindow.setContent("<form method='post'><label>Giờ bắt đầu</label><input class='form-control' id='time' type='time' name='time' required='required'><br><label>Ghi chú</label><input class='form-control' id='note' type='text' name='txt' required='required'></br><input type='button' class='btn' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='pushMarker()'></form>");
+}
+function pushMarker(){
+  lats.push(infowindow.getPosition().lat());
+  longs.push(infowindow.getPosition().lng());
+  times.push(document.getElementById('time').value);
+  notes.push(document.getElementById('note').value);
+  $('#headListLocation').after("<li><a href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time').value+"</a><div title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
 }
 // kết thúc tạo maker
 $('.sortable').sortable({
