@@ -51,9 +51,9 @@ function pushMarker(m){
   $('#headListLocation').after("<li id='ListLocation-"+n+"'><a href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time-'+m).value+"</a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
 }
 function deleteElement(n){
-  myMarkers.splice(n,1);
-  times.splice(n,1);
-  notes.splice(n,1);
+  delete myMarkers[n];
+  delete times[n];
+  delete notes[n];
   $('#ListLocation-'+n).remove();
   markers[n].setMap(null);
 }
@@ -77,6 +77,40 @@ function selectMyPosition(position){
       title:"I am Here !"
   });
 }
+
+function swap(mang, i,j,){
+  var k = mang[i];
+  mang[i] = mang[j];
+  mang[j] = k;
+}
+function SortTime(){
+  for (var i = times.length-1; i>0;i--) {
+    for (var j = 0; j < i; j++) {
+      if(times[j] <= times[i]) {
+          swap(times,i,j);
+          swap(notes,i,j);
+          swap(myMarkers,i,j);
+          var ele = $('#ListLocation-'+i).html();
+          $('#ListLocation-'+i).html($('#ListLocation-'+j).html());
+          $('#ListLocation-'+j).html(ele);
+      }
+    }
+  }
+  var timesResort = [];
+  var notesResort = [];
+  var myMarkerResort = [];
+  for (var i = times.length-1; i>=0;i--) {
+    timesResort.push(times[i]);
+    notesResort.push(notes[i]);
+    myMarkerResort.push(myMarkers[i]);
+  }
+  for (var i = 0; i < times.length; i++) {
+    times[i] = timesResort[i];
+    notes[i] = notesResort[i];
+    myMarkers[i] = myMarkerResort[i];
+  }
+}
+
 // kêt thúc hàm tìm vị trí của bạn
 $('.sortable').sortable({
   items: ':not(.disabled)'
