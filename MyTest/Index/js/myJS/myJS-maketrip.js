@@ -1,6 +1,7 @@
 var map;
-var lats = [];
-var longs = [];
+var infowindows = [];
+var markers = [];
+var myMarkers = [];
 var times = [];
 var notes = [];
 var flag = 'https://cdn0.iconfinder.com/data/icons/fatcow/32/flag_finish.png';
@@ -19,31 +20,40 @@ function initMap() {
       createMarker(event.latLng);
     })
 }
-var infowindow;
 function createMarker(place) {
   var marker = new google.maps.Marker({
       map: map,
       position: place,
       animation: google.maps.Animation.DROP,
   });
-  infowindow = new google.maps.InfoWindow();
+  markers.push(marker);
+  var infowindow = new google.maps.InfoWindow();
+  infowindows.push(infowindow);
+  var m = infowindows.length-1;
   var geocoder = new google.maps.Geocoder();
   marker.addListener('click', function() {
     geocoder.geocode( { 'location': place}, function(results, status) {
-      infowindow.setContent(results[0].formatted_address+"<br><button onclick='setContentForm()' class='btn-defaule'><i class='fa fa-pencil fa-lg'></i></button>");
-      infowindow.open(map, marker);
+      infowindows[m].setContent(results[0].formatted_address+"<br><button onclick='setContentForm("+m+")' class='btn-defaule'><i class='fa fa-pencil fa-lg'></i></button>");
+      infowindows[m].open(map, marker);
     });
   });
 }
-function setContentForm(){
-  infowindow.setContent("<form method='post'><label>Giờ bắt đầu</label><input class='form-control' id='time' type='time' name='time' required='required'><br><label>Ghi chú</label><input class='form-control' id='note' type='text' name='txt' required='required'></br><input type='button' class='btn' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='pushMarker()'></form>");
+function setContentForm(m){ 
+  infowindows[m].setContent("<label>Giờ bắt đầu</label><input class='form-control' id='time-"+m+"' type='time' name='time' required='required'><br><label>Ghi chú</label><input class='form-control' id='note-"+m+"' type='text' name='txt' required='required'></br><input type='button' class='btn' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='pushMarker("+m+")'>");
 }
-function pushMarker(){
-  lats.push(infowindow.getPosition().lat());
-  longs.push(infowindow.getPosition().lng());
-  times.push(document.getElementById('time').value);
-  notes.push(document.getElementById('note').value);
-  $('#headListLocation').after("<li><a href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time').value+"</a><div title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+function pushMarker(m){
+  myMarkers.push(markers[m]);
+  times.push(document.getElementById("time-"+m).value);
+  notes.push(document.getElementById("note-"+m).value);
+  var n=myMarkers.length-1;
+  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time-'+m).value+"</a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+}
+function deleteElement(n){
+  myMarkers.splice(n,1);
+  times.splice(n,1);
+  notes.splice(n,1);
+  $('#ListLocation-'+n).remove();
+  markers[n].setMap(null);
 }
 // kết thúc tạo maker
 $('.sortable').sortable({
