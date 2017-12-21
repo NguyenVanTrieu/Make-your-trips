@@ -4,7 +4,7 @@ var markers = [];
 var myMarkers = [];
 var times = [];
 var notes = [];
-var flag = 'https://cdn0.iconfinder.com/data/icons/fatcow/32/flag_finish.png';
+var flag = 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Flag--Pink.png';
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 20.996004, lng: 105.808000},
@@ -21,9 +21,11 @@ function initMap() {
     })
 }
 function createMarker(place) {
+  var image = "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Bubble-Chartreuse.png";
   var marker = new google.maps.Marker({
       map: map,
       position: place,
+      icon: image,
       animation: google.maps.Animation.DROP,
   });
   markers.push(marker);
@@ -56,6 +58,26 @@ function deleteElement(n){
   markers[n].setMap(null);
 }
 // kết thúc tạo maker
+function FindMe(){
+    if(navigator.geolocation){
+      navigator.geolocation.watchPosition(selectMyPosition);
+    }
+}
+function selectMyPosition(position){
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  var myLatlng = new google.maps.LatLng(latitude,longitude);
+  map.setZoom(15);
+  map.setCenter({lat:latitude, lng:longitude});
+  var image = "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Ball-Pink.png";
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      icon: image,
+      title:"I am Here !"
+  });
+}
+// kêt thúc hàm tìm vị trí của bạn
 $('.sortable').sortable({
   items: ':not(.disabled)'
 });
