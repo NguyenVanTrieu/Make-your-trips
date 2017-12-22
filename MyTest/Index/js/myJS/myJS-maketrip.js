@@ -4,8 +4,11 @@ var markers = [];
 var myMarkers = [];
 var times = [];
 var notes = [];
+var service;
+var defaultLocation;
 var flag = 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Flag--Pink.png';
 function initMap() {
+    defaultLocation = new google.maps.LatLng(20.996004,105.808000);
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 20.996004, lng: 105.808000},
       zoom: 15
@@ -29,13 +32,15 @@ function createMarker(place) {
       animation: google.maps.Animation.DROP,
   });
   markers.push(marker);
-  var infowindow = new google.maps.InfoWindow();
+  var infowindow = new google.maps.InfoWindow({
+    maxWidth: 200
+  });
   infowindows.push(infowindow);
   var m = infowindows.length-1;
   var geocoder = new google.maps.Geocoder();
   marker.addListener('click', function() {
     geocoder.geocode( { 'location': place}, function(results, status) {
-      infowindows[m].setContent(results[0].formatted_address+"<br><button onclick='setContentForm("+m+")' class='btn-defaule'><i class='fa fa-pencil fa-lg'></i></button>");
+      infowindows[m].setContent(results[0].formatted_address+"<hr><div><button title='Xóa' onclick='deleteMarker("+m+")' class='buttons'><i class='fa fa-times fa-lg'></i></button><button title='Ghim cờ' onclick='changeDefaultLocation("+m+")' class='buttons'><i class='fa fa-flag-o fa-lg'></i></button><button title='Ghi chú' onclick='setContentForm("+m+")' class='buttons'><i class='fa fa-pencil fa-lg'></i></button></div>");
       infowindows[m].open(map, marker);
     });
   });
@@ -55,6 +60,9 @@ function deleteElement(n){
   delete times[n];
   delete notes[n];
   $('#ListLocation-'+n).remove();
+  markers[n].setMap(null);
+}
+function deleteMarker(n){
   markers[n].setMap(null);
 }
 // kết thúc tạo maker
@@ -77,7 +85,7 @@ function selectMyPosition(position){
       title:"I am Here !"
   });
 }
-
+// Hàm sort theo time
 function swap(mang, i,j,){
   var k = mang[i];
   mang[i] = mang[j];
@@ -110,8 +118,78 @@ function SortTime(){
     myMarkers[i] = myMarkerResort[i];
   }
 }
+// kêt thúc hàm sort
+// Tìn thồng tin địa điểm xung quanh vị chí tìm kiếm
+function getHelpOption(){
+  var helpOptions = [];
+  var checkbox = document.getElementsByName('helpOption');
+  for (var i = 0; i < checkbox.length; i++){
+    if (checkbox[i].checked === true){
+      helpOptions.push(checkbox[i].value);
+    }
+  }
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  for (var i = 0; i < helpOptions.length; i++) {
+    searchObjectnearLocaltion(helpOptions[i]);
+  }
+}
+function searchObjectnearLocaltion(type){
+    var request = {
+      location: defaultLocation,
+      radius: 500,
+      type: [type]
+    }
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, callback);
+  }
+function callback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        results.forEach(createMarkerNearbysearch);
+      }
+  }
 
-// kêt thúc hàm tìm vị trí của bạn
+function createMarkerNearbysearch(place) {
+  var image = {
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(25, 25)
+    };
+    var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+          icon: image
+      });
+    markers.push(marker);
+    var infowindow = new google.maps.InfoWindow({
+      maxWidth: 200
+    });
+    infowindows.push(infowindow);
+    var m = infowindows.length-1;
+    marker.addListener('click', function() {
+      var request = {
+          reference: place.reference
+      };
+      service.getDetails(request, function(details, status) {
+        infowindow.setContent([
+          "<b>"+details.name+"</b>",
+          details.formatted_address,
+          "<a target='_blank' href='"+details.website+"'>"+details.website+"</a>",
+          "Đánh giá: <b>"+details.rating+"</b>",
+          "Số điện thoại: <b>"+details.formatted_phone_number+"</b>",
+          "<hr><div><button title='Xóa' onclick='deleteMarker("+m+")' class='buttons'><i class='fa fa-times fa-lg'></i></button><button title='Ghim cờ' onclick='changeDefaultLocation("+m+")' class='buttons'><i class='fa fa-flag-o fa-lg'></i></button><button title='Ghi chú' onclick='setContentForm("+m+")' class='buttons'><i class='fa fa-pencil fa-lg'></i></button></div>"].join("<br/>"));
+        infowindow.open(map, marker);
+      });
+    });
+  }
+function changeDefaultLocation(n){
+  defaultLocation = new google.maps.LatLng(infowindows[n].getPosition().lat(),infowindows[n].getPosition().lng());
+  markers[n].setIcon('https://cdn3.iconfinder.com/data/icons/softwaredemo/PNG/48x48/Flag1_Green.png');
+}
+// kết thúc tìm thông tin liên quan
 $('.sortable').sortable({
   items: ':not(.disabled)'
 });

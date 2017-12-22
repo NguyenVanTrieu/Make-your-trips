@@ -982,7 +982,7 @@ a:focus {
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu,
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu,
 .navbar-nav > .tasks-menu > .dropdown-menu > li .menu {
-  max-height: 200px;
+  max-height: auto;
   margin: 0;
   padding: 0 20px;
   list-style: none; 
