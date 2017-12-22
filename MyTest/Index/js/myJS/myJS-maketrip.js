@@ -16,9 +16,27 @@ function initMap() {
     });
     var marker = new google.maps.Marker({
       map: map,
-      draggable: true,
       position: {lat: 20.996004, lng: 105.808000},
       icon: flag
+    });
+    var input = document.getElementById('pac-input');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.bindTo('bounds', map);
+
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(15);
+      }
+      createMarker(place.geometry.location);
+      markers.push(marker);
     });
     google.maps.event.addListener(map,'click', function(event) {
       createMarker(event.latLng);
@@ -55,7 +73,7 @@ function pushMarker(m){
   times.push(document.getElementById("time-"+m).value);
   notes.push(document.getElementById("note-"+m).value);
   var n=lats.length-1;
-  $('#headListLocation').after("<li id='ListLocation-"+n+"' onclick='setMapMyMarker("+m+")'><a href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time-'+m).value+"</a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a onclick='setMapMyMarker("+n+")' href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time-'+m).value+"</a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
 }
 function deleteElement(n){
   delete lats[n];
@@ -129,7 +147,7 @@ function SortTime(){
 // kêt thúc hàm sort
 // Thiết lập bản đồ cho tất cả markers đã chọn
 function setMapMyMarker(i) {
-    markers[i].setMap(null);
+    //markers[i].setMap(null);
     var marker = new google.maps.Marker({
       map: map,
       position: {lat: lats[i], lng: lngs[i]},
@@ -191,10 +209,12 @@ function createMarkerNearbysearch(place) {
           icon: image
       });
     markers.push(marker);
+
     var infowindow = new google.maps.InfoWindow({
       maxWidth: 200
     });
     infowindows.push(infowindow);
+    alert(infowindows.length);
     var m = infowindows.length-1;
     marker.addListener('click', function() {
       var request = {
