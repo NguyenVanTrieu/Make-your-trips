@@ -73,7 +73,8 @@ function pushMarker(m){
   times.push(document.getElementById("time-"+m).value);
   notes.push(document.getElementById("note-"+m).value);
   var n=lats.length-1;
-  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a onclick='setMapMyMarker("+n+")' href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time-'+m).value+"</a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a onclick='setCenterMyLocation("+n+")' href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time-'+m).value+"</a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+  setMapMyMarker(n,m);
 }
 function deleteElement(n){
   delete lats[n];
@@ -146,8 +147,11 @@ function SortTime(){
 }
 // kêt thúc hàm sort
 // Thiết lập bản đồ cho tất cả markers đã chọn
-function setMapMyMarker(i) {
-    //markers[i].setMap(null);
+function setCenterMyLocation(i){
+  map.setCenter({lat: lats[i],lng: lngs[i]});
+}
+function setMapMyMarker(i,m) {
+    markers[m].setMap(null);
     var marker = new google.maps.Marker({
       map: map,
       position: {lat: lats[i], lng: lngs[i]},
@@ -241,6 +245,36 @@ function changeDefaultLocation(n){
   markers[n].setIcon(defaultLocationIcon);
 }
 // kết thúc tìm thông tin liên quan
+// Chi đường----------------
+function FindStreet(){
+  for (var i = 0; i < lats.length-1; i++) {
+    var x = new google.maps.LatLng(lats[i],lngs[i]);
+    var y = new google.maps.LatLng(lats[i+1],lngs[i+1]); 
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    calculateAndDisplayRoute(directionsService, directionsDisplay,x,y);
+    directionsDisplay.setMap(map);
+  }
+}
+function calculateAndDisplayRoute(directionsService, directionsDisplay,x,y) {
+  directionsService.route({
+    origin: x,
+    destination: y,
+    travelMode: google.maps.TravelMode.DRIVING
+  }, function(response, status) {
+    if (status === google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+//get direction info
+var htmlReturn = '';
+var route = response.routes[0];
+htmlReturn += "Distance: <strong>" + route.legs[0].distance.text + "</strong>, Duration: <strong>" + route.legs[0].duration.text + "</strong>";
+document.getElementById('infoDirections').innerHTML  = htmlReturn;
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+}
+// -------------------------
 function saveToDB(){
   var name = prompt('Tên tiến trình của bạn');
   if(name != ""){
