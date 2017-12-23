@@ -51,6 +51,7 @@ li.highlight {
   float: left;
   color: #fff;
   padding-top: 7px;
+  margin-left: 1px;
 }
 .sortable li input[type=date]{
   width: 70%;
@@ -58,6 +59,10 @@ li.highlight {
   border: 0px;
   color: #fff;
   background: rgba(255,255,255,0);
+}
+.sortable li input[type=button]{
+  width: 75%;
+  margin-left: 10%;
 }
 hr{
   margin-bottom: 5px;
@@ -82,4 +87,15 @@ hr{
   height: 100%;
   float: right;
   margin-top: 1px;
+}
+#iamhere{
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  line-height: 28px;
+  padding-left:8px;
+  background: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0px 1px #dad9d9;
 }

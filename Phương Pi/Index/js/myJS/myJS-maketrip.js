@@ -28,6 +28,8 @@ function initMap() {
       position: {lat: 20.996004, lng: 105.808000},
       icon: flag
     });
+    var iamhere = document.getElementById('iamhere');
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(iamhere);
     var input = document.getElementById('pac-input');
     var autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.bindTo('bounds', map);

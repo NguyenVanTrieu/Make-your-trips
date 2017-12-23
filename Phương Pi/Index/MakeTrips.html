@@ -119,6 +119,10 @@
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
+
+      <div id="iamhere" onclick="FindMe()" title="Vị trí hiện tại của bạn"><i class="fa fa-bullseye fa-lg"></i></div>
+
+
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">QUẢN LÝ TIẾN TRÌNH</li>
         <li class="treeview active">
@@ -131,15 +135,18 @@
           <ul class="treeview-menu sortable list" id="myListLocation">
             <li class="disabled"><label>Bắt đầu</label><input class="form-control" type="date" name="startDate"></li>
             <li class="disabled"><label>Kết thúc</label><input class="form-control" type="date" name="endDate"></li><br>
-            <li class="disabled" id="headListLocation"><a href="#"><i class="fa fa-circle-o"></i> Bắt đầu</a><div onclick="FindMe()" title="Vị trí hiện tại của bạn"><i class="fa fa-bullseye fa-lg"></i></div></li>
+            <div id="headListLocation"></div>
             <br>
             <li class="disabled">
                 <input class="btn btn-success" type="button" name="" value="Sắp xếp" onclick="SortTime()">
+            </li>
+            <br>
+            <li class="disabled">
                 <input class="btn btn-danger" type="button" name="" value="Tạo tuyến đường" onclick="FindStreet()">
             </li>
             <br>
             <li class="disabled">
-                <input class="btn btn-primary" type="button" name="" value="Lưu thành lịch trình của bạn" onclick="saveToDB()">
+                <input class="btn btn-primary" type="button" name="" value="Lưu lịch trình của bạn" onclick="saveToDB()">
             </li>
             <br>
           </ul>
