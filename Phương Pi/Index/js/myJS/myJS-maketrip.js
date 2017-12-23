@@ -1,10 +1,19 @@
 var map;
 var infowindows = [];
 var markers = [];
+var address = [];
+var subaddress = [];
+var mymarkers = [];
+// các mảng cần gửi qua ajax
+var myaddress = [];
+var mysubaddress = [];
 var lats = [];
 var lngs = [];
-var times = [];
+var startTimes = [];
+var endTimes = [];
 var notes = [];
+var states = [];
+// end
 var service;
 var defaultLocation;
 var flag = 'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/48/Map-Marker-Flag--Pink.png';
@@ -59,31 +68,65 @@ function createMarker(place) {
   var geocoder = new google.maps.Geocoder();
   marker.addListener('click', function() {
     geocoder.geocode( { 'location': place}, function(results, status) {
+      address.push(results[0].formatted_address);
+      subaddress.push(results[0].address_components[0].short_name+', '+results[0].address_components[1].short_name);
       infowindows[m].setContent(results[0].formatted_address+"<hr><div><button title='Xóa' onclick='deleteMarker("+m+")' class='buttons'><i class='fa fa-times fa-lg'></i></button><button title='Ghim cờ' onclick='changeDefaultLocation("+m+")' class='buttons'><i class='fa fa-flag-o fa-lg'></i></button><button title='Ghi chú' onclick='setContentForm("+m+")' class='buttons'><i class='fa fa-pencil fa-lg'></i></button></div>");
       infowindows[m].open(map, marker);
     });
   });
 }
+
 function setContentForm(m){ 
-  infowindows[m].setContent("<label>Giờ bắt đầu</label><input class='form-control' id='time-"+m+"' type='time' name='time' required='required'><br><label>Ghi chú</label><input class='form-control' id='note-"+m+"' type='text' name='txt' required='required'></br><input type='button' class='btn' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='pushMarker("+m+")'>");
+  infowindows[m].setContent("<label>Giờ bắt đầu</label><input class='form-control' id='Start-time-"+m+"' type='datetime-local' name='Starttime' required='required'><br><label>Giờ kết thúc</label><input class='form-control' id='End-time-"+m+"' type='datetime-local' name='Endtime' required='required'><br><label>Ghi chú</label><input class='form-control' id='note-"+m+"' type='text' name='txt' required='required'><br><label>Trạng thái</label><select class='form-control' id='state'><option value='1'>Điểm bắt đầu</option><option value='2'>Điểm kết thúc</option><option value='3'>Nghỉ ngơi</option><option value='4'>Vui chơi</option><option value='5'>Ăn</option><option value='6'>Uống</option><option value='7'>Ngắm cảnh</option> <option value='8'>Tụ họp</option><option value='9'>Tự do</option></select></br><input type='submit' class='btn btn-danger' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='pushMarker("+m+")'>");
 }
 function pushMarker(m){
   lats.push(infowindows[m].getPosition().lat());
   lngs.push(infowindows[m].getPosition().lng());
-  times.push(document.getElementById("time-"+m).value);
+  startTimes.push(document.getElementById("Start-time-"+m).value);
+  endTimes.push(document.getElementById("End-time-"+m).value);
   notes.push(document.getElementById("note-"+m).value);
+  states.push(document.getElementById('state').value);
+  myaddress.push(address[m]);
+  mysubaddress.push(subaddress[m]);
+  alert(mysubaddress);
+  var iconstate;
+  switch(document.getElementById('state').value){
+    case '1': iconstate = 'fa fa-hourglass-start';
+      break;
+    case '2': iconstate = 'fa fa-hourglass-end';
+      break;
+    case '3': iconstate = 'fa fa-bed';
+      break;
+    case '4': iconstate = 'fa fa-reddit-alien';
+      break;
+    case '5': iconstate = 'fa fa-cutlery';
+      break;
+    case '6': iconstate = 'fa fa-coffee';
+      break;
+    case '7': iconstate = 'fa fa-eye';
+      break;
+    case '8': iconstate = 'fa fa-users';
+      break;
+    case '9': iconstate = 'fa fa-user-o';
+      break;
+  }
   var n=lats.length-1;
-  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a onclick='setCenterMyLocation("+n+")' href='#''><i class='fa fa-circle-o'></i> "+document.getElementById('time-'+m).value+"</a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a onclick='setCenterMyLocation("+n+")' href='#''><i class='fa fa-circle-o'></i> "+startTimes[m]+"<span id='lacatTypes' class='label label-success'><i class='"+iconstate+"'></i></span></a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
   setMapMyMarker(n,m);
 }
 function deleteElement(n){
   delete lats[n];
   delete lngs[n];
-  delete times[n];
+  delete startTimes[n];
+  delete endTimes[n];
   delete notes[n];
-  alert(times.length);
+  delete states[n];
+  delete myaddress[n];
+  delete mysubaddress[n];
   $('#ListLocation-'+n).remove();
-  markers[n].setMap(null);
+  if(mymarkers[n].getMap()){
+    mymarkers[n].setMap(null);
+  }
 }
 function deleteMarker(n){
   markers[n].setMap(null);
@@ -115,34 +158,50 @@ function swap(mang, i,j,){
   mang[j] = k;
 }
 function SortTime(){
-  for (var i = times.length-1; i>0;i--) {
+  for (var i = startTimes.length-1; i>0;i--) {
     for (var j = 0; j < i; j++) {
-      if(times[j] <= times[i]) {
-          swap(times,i,j);
+      if(startTimes[j] <= startTimes[i]) {
+          swap(startTimes,i,j);
+          swap(endTimes,i,j);
           swap(notes,i,j);
           swap(lats,i,j);
           swap(lngs,i,j);
+          swap(states,i,j);
+          swap(myaddress,i,j);
+          swap(mysubaddress,i,j);
           var ele = $('#ListLocation-'+i).html();
           $('#ListLocation-'+i).html($('#ListLocation-'+j).html());
           $('#ListLocation-'+j).html(ele);
       }
     }
   }
-  var timesResort = [];
+  var startTimesResort = [];
+  var endTimesResort = [];
   var notesResort = [];
   var latsResort = [];
   var lngsResort = [];
-  for (var i = times.length-1; i>=0;i--) {
-    timesResort.push(times[i]);
+  var statesResort = [];
+  var myaddressResort = [];
+  var mysubaddressResort = [];
+  for (var i = startTimes.length-1; i>=0;i--) {
+    startTimesResort.push(startTimes[i]);
+    endTimesResort.push(endTimes[i]);
     notesResort.push(notes[i]);
     latsResort.push(lats[i]);
     lngsResort.push(lngs[i]);
+    statesResort.push(states[i]);
+    myaddressResort.push(myaddress[i]);
+    mysubaddressResort.push(mysubaddress[i]);
   }
-  for (var i = 0; i < times.length; i++) {
-    times[i] = timesResort[i];
+  for (var i = 0; i < startTimes.length; i++) {
+    startTimes[i] = startTimesResort[i];
+    endTimes[i] = endTimesResort[i];
     notes[i] = notesResort[i];
     lats[i] = latsResort[i];
     lngs[i] = lngsResort[i];
+    states[i] = statesResort[i];
+    myaddress[i] = myaddressResort[i];
+    mysubaddress[i] = mysubaddressResort[i];
   }
 }
 // kêt thúc hàm sort
@@ -157,12 +216,15 @@ function setMapMyMarker(i,m) {
       position: {lat: lats[i], lng: lngs[i]},
       icon: "https://cdn3.iconfinder.com/data/icons/softwaredemo/PNG/48x48/Flag1_Green.png"
     });
+    mymarkers.push(marker);
     var infowindow = new google.maps.InfoWindow({
       maxWidth: 200
     });
-    var t = times[i];
+    var addr = myaddress[i];
+    var st = startTimes[i];
+    var et = endTimes[i];
     var n = notes[i];
-    infowindow.setContent("<b>Thời gian bắt đầu: </b>"+t+"<br> <b>Ghi chú: </b>"+n+"<hr><div><button title='Ghi chú' onclick='' class='buttons'><i class='fa fa-pencil fa-lg'></i></button></div>");
+    infowindow.setContent("<b>Địa chỉ:</b><br>"+addr+"<br><b>Thời gian bắt đầu: </b><br>"+st+"<br><b>Thời gian Kết thúc: </b><br><b>"+et+"<br>Ghi chú: </b><br>"+n+"<hr><div><button title='Ghi chú' onclick='' class='buttons'><i class='fa fa-pencil fa-lg'></i></button></div>");
     infowindow.open(map,marker);
     marker.addListener('click', function(){
       infowindow.open(map,marker);
@@ -218,7 +280,6 @@ function createMarkerNearbysearch(place) {
       maxWidth: 200
     });
     infowindows.push(infowindow);
-    alert(infowindows.length);
     var m = infowindows.length-1;
     marker.addListener('click', function() {
       var request = {
@@ -264,15 +325,15 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay,x,y) {
   }, function(response, status) {
     if (status === google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
-//get direction info
-var htmlReturn = '';
-var route = response.routes[0];
-htmlReturn += "Distance: <strong>" + route.legs[0].distance.text + "</strong>, Duration: <strong>" + route.legs[0].duration.text + "</strong>";
-document.getElementById('infoDirections').innerHTML  = htmlReturn;
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
-  });
+  //get direction info
+  var htmlReturn = '';
+  var route = response.routes[0];
+  htmlReturn += "Distance: <strong>" + route.legs[0].distance.text + "</strong>, Duration: <strong>" + route.legs[0].duration.text + "</strong>";
+  document.getElementById('infoDirections').innerHTML  = htmlReturn;
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
 }
 // -------------------------
 function saveToDB(){

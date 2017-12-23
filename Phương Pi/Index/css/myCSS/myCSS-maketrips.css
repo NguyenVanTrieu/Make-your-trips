@@ -1,52 +1,64 @@
 #pac-input{
-      position: absolute;
-      margin-left: 45px;
-      width: 500px;
-      height: 50px;
-      border-radius:0 5px 5px 0;
-    }
-    #infowindow-content .title {
-      font-weight: bold;
-    }
+  position: absolute;
+  margin-left: 45px;
+  width: 500px;
+  height: 50px;
+  border-radius:0 5px 5px 0;
+}
+#infowindow-content .title {
+  font-weight: bold;
+}
 
-    #infowindow-content {
-      display: none;
-    }
+#infowindow-content {
+  display: none;
+}
 
-    #map #infowindow-content {
-      display: inline;
-    }
-    .sortable li{
-      height: 30px;
-      width: 100%;
-    }
-    .sortable li a{
-      width: 90%;
-      float: left;
-    }
-    .sortable li div{
-      float: left;
-      width: 10%;
-      height: 100%;
-      color: #8aa4af;
-      cursor: pointer;
-      padding: 3px 0 0 2px;
-    }
-    .sortable li div:hover{
-      color: #fff;
-    }
-    .sortable li.sortable-placeholder {
-      border: 1px dashed #CCC;
-      background: none;
-    }
-    li.highlight {
-      background: #FEE25F;
-    }
-    #features {
-      margin: auto;
-      width: 460px;
-      font-size: 0.9em;
-    }
+#map #infowindow-content {
+  display: inline;
+}
+.sortable li{
+  height: 30px;
+  width: 100%;
+}
+.sortable li a{
+  width: 90%;
+  float: left;
+}
+.sortable li div{
+  float: left;
+  width: 10%;
+  height: 100%;
+  color: #8aa4af;
+  cursor: pointer;
+  padding: 3px 0 0 2px;
+}
+.sortable li div:hover{
+  color: #fff;
+}
+.sortable li.sortable-placeholder {
+  border: 1px dashed #CCC;
+  background: none;
+}
+li.highlight {
+  background: #FEE25F;
+}
+#features {
+  margin: auto;
+  width: 460px;
+  font-size: 0.9em;
+}
+.sortable li label{
+  float: left;
+  color: #fff;
+  padding-top: 7px;
+}
+.sortable li input[type=date]{
+  width: 70%;
+  float: right;
+  border: 0px;
+  color: #fff;
+  background: rgba(255,255,255,0);
+}
 hr{
   margin-bottom: 5px;
 }
@@ -64,4 +76,10 @@ hr{
   width: 85%;
   height: 30px;
   z-index: 100;
+}
+#lacatTypes{
+  padding: 3px;
+  height: 100%;
+  float: right;
+  margin-top: 1px;
 }

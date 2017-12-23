@@ -298,8 +298,14 @@ a:focus {
 .main-header .logo .logo-lg {
   display: block;
 }
+.main-header .logo .logo-lg img{
+  margin-left: -20px;
+}
 .main-header .logo .logo-mini {
   display: none;
+}
+.logo-img{
+  width: 40px;
 }
 .main-header .navbar-brand {
   color: #fff;
