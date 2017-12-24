@@ -94,38 +94,44 @@ function setContentForm(m){
   infowindows[m].setContent("<label>Giờ bắt đầu</label><input class='form-control' id='Start-time-"+m+"' type='datetime-local' name='Starttime' required='required'><br><label>Giờ kết thúc</label><input class='form-control' id='End-time-"+m+"' type='datetime-local' name='Endtime' required='required'><br><label>Ghi chú</label><input class='form-control' id='note-"+m+"' type='text' name='txt' required='required'><br><label>Trạng thái</label><select class='form-control' id='state'><option value='1'>Điểm bắt đầu</option><option value='2'>Điểm kết thúc</option><option value='3'>Nghỉ ngơi</option><option value='4'>Vui chơi</option><option value='5'>Ăn</option><option value='6'>Uống</option><option value='7'>Ngắm cảnh</option> <option value='8'>Tụ họp</option><option value='9'>Tự do</option></select></br><input type='submit' class='btn btn-danger' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='pushMarker("+m+")'>");
 }
 function pushMarker(m){
-  lats.push(infowindows[m].getPosition().lat());
-  lngs.push(infowindows[m].getPosition().lng());
-  startTimes.push(document.getElementById("Start-time-"+m).value);
-  endTimes.push(document.getElementById("End-time-"+m).value);
-  notes.push(document.getElementById("note-"+m).value);
-  states.push(document.getElementById('state').value);
-  myaddress.push(address[m]);
-  mysubaddress.push(subaddress[m]);
-  var iconstate;
-  switch(document.getElementById('state').value){
-    case '1': iconstate = "class='fa fa-hourglass-start' title='Điểm bắt đầu'";
-      break;
-    case '2': iconstate = "class='fa fa-hourglass-end' title='Điểm kết thúc'";
-      break;
-    case '3': iconstate = "class='fa fa-bed' title='Điểm Nghỉ ngơi'";
-      break;
-    case '4': iconstate = "class='fa fa-reddit-alien' title='Điểm vui chơi'";
-      break;
-    case '5': iconstate = "class='fa fa-cutlery' title='Ăn'";
-      break;
-    case '6': iconstate = "class='fa fa-coffee' title='Uống'";
-      break;
-    case '7': iconstate = "class='fa fa-eye' title='Ngắm cảnh'";
-      break;
-    case '8': iconstate = "class='fa fa-users' title='Hội họp'";
-      break;
-    case '9': iconstate = "class='fa fa-user-o' title='Tự do'";
-      break;
+  if(document.getElementById("Start-time-"+m).value=='' || document.getElementById("End-time-"+m).value=='' || document.getElementById("note-"+m).value==''){
+    alert("Hãy nhập đủ các thông tin");
+    return;
   }
-  var n=lats.length-1;
-  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a title='"+subaddress[m]+"' onclick='setCenterMyLocation("+n+")'><i class='fa fa-circle-o'></i> <span class='hidden-17'>"+subaddress[m]+"</span></a><span id='lacatTypes' class='label label-success'><i "+iconstate+"></i></span><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
-  setMapMyMarker(n,m);
+  else{
+    lats.push(infowindows[m].getPosition().lat());
+    lngs.push(infowindows[m].getPosition().lng());
+    startTimes.push(document.getElementById("Start-time-"+m).value);
+    endTimes.push(document.getElementById("End-time-"+m).value);
+    notes.push(document.getElementById("note-"+m).value);
+    states.push(document.getElementById('state').value);
+    myaddress.push(address[m]);
+    mysubaddress.push(subaddress[m]);
+    var iconstate;
+    switch(document.getElementById('state').value){
+      case '1': iconstate = "class='fa fa-hourglass-start' title='Điểm bắt đầu'";
+        break;
+      case '2': iconstate = "class='fa fa-hourglass-end' title='Điểm kết thúc'";
+        break;
+      case '3': iconstate = "class='fa fa-bed' title='Điểm Nghỉ ngơi'";
+        break;
+      case '4': iconstate = "class='fa fa-reddit-alien' title='Điểm vui chơi'";
+        break;
+      case '5': iconstate = "class='fa fa-cutlery' title='Ăn'";
+        break;
+      case '6': iconstate = "class='fa fa-coffee' title='Uống'";
+        break;
+      case '7': iconstate = "class='fa fa-eye' title='Ngắm cảnh'";
+        break;
+      case '8': iconstate = "class='fa fa-users' title='Hội họp'";
+        break;
+      case '9': iconstate = "class='fa fa-user-o' title='Tự do'";
+        break;
+    }
+    var n=lats.length-1;
+    $('#headListLocation').after("<li id='ListLocation-"+n+"'><a title='"+subaddress[m]+"' onclick='setCenterMyLocation("+n+")'><i class='fa fa-circle-o'></i> <span class='hidden-17'>"+subaddress[m]+"</span></a><span id='lacatTypes' class='label label-success'><i "+iconstate+"></i></span><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+    setMapMyMarker(n,m);
+  }
 }
 
 function deleteElement(n){
