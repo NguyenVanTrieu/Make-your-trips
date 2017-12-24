@@ -16,8 +16,8 @@ class CreateImgPicture extends Migration
         Schema::table('img_pictures', function (Blueprint $table) {
             $table->create();
             $table->increments('id');
-            $table->string('location', 100);
-            $table->string('link', 100);
+            $table->string('location');
+            $table->string('link');
             $table->boolean('status');
         });
     }

@@ -24,7 +24,7 @@ class CreateUserTable extends Migration
             $table->string('email')->unique();
             $table->string('facebook');
             $table->string('phone', 15);
-            $table->smallInteger('role_id')->unsigned();
+            $table->smallInteger('role_id')->unsigned()->nullable();
             $table->foreign('role_id')->references('id')->on('roles');
             $table->integer('avatar_id')->unsigned();
             $table->foreign('avatar_id')->references('id')->on('img_pictures');
