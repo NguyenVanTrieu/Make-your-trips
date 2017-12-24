@@ -79,20 +79,20 @@ function createMarker(place) {
     subaddress.push(results[0].address_components[0].short_name+', '+results[0].address_components[1].short_name);
   });
 }
-function getAddressAndsubaddress(){
-  for (var i = 0; i < infowindows.length; i++) {
+function getAddressAndsubaddress(place){
+  for (var i = 0; i < markers.length; i++) {
     var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'location': infowindows[i].getPosition()}, function(results, status){
-      address.push(results[0].formatted_address);
-      subaddress.push(results[0].address_components[0].short_name+', '+results[0].address_components[1].short_name);
+    geocoder.geocode({'location': markers[i].getPosition()}, function(results, status){
+      address[i] = results[0].formatted_address;
+      subaddress[i] =  results[0].address_components[0].short_name+', '+results[0].address_components[1].short_name;
     });
   }
+  alert(address);
 }
 function setContentForm(m){ 
   infowindows[m].setContent("<label>Giờ bắt đầu</label><input class='form-control' id='Start-time-"+m+"' type='datetime-local' name='Starttime' required='required'><br><label>Giờ kết thúc</label><input class='form-control' id='End-time-"+m+"' type='datetime-local' name='Endtime' required='required'><br><label>Ghi chú</label><input class='form-control' id='note-"+m+"' type='text' name='txt' required='required'><br><label>Trạng thái</label><select class='form-control' id='state'><option value='1'>Điểm bắt đầu</option><option value='2'>Điểm kết thúc</option><option value='3'>Nghỉ ngơi</option><option value='4'>Vui chơi</option><option value='5'>Ăn</option><option value='6'>Uống</option><option value='7'>Ngắm cảnh</option> <option value='8'>Tụ họp</option><option value='9'>Tự do</option></select></br><input type='submit' class='btn btn-danger' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='pushMarker("+m+")'>");
 }
 function pushMarker(m){
-  //getAddressAndsubaddress();
   lats.push(infowindows[m].getPosition().lat());
   lngs.push(infowindows[m].getPosition().lng());
   startTimes.push(document.getElementById("Start-time-"+m).value);
@@ -103,27 +103,27 @@ function pushMarker(m){
   mysubaddress.push(subaddress[m]);
   var iconstate;
   switch(document.getElementById('state').value){
-    case '1': iconstate = 'fa fa-hourglass-start';
+    case '1': iconstate = "class='fa fa-hourglass-start' title='Điểm bắt đầu'";
       break;
-    case '2': iconstate = 'fa fa-hourglass-end';
+    case '2': iconstate = "class='fa fa-hourglass-end' title='Điểm kết thúc'";
       break;
-    case '3': iconstate = 'fa fa-bed';
+    case '3': iconstate = "class='fa fa-bed' title='Điểm Nghỉ ngơi'";
       break;
-    case '4': iconstate = 'fa fa-reddit-alien';
+    case '4': iconstate = "class='fa fa-reddit-alien' title='Điểm vui chơi'";
       break;
-    case '5': iconstate = 'fa fa-cutlery';
+    case '5': iconstate = "class='fa fa-cutlery' title='Ăn'";
       break;
-    case '6': iconstate = 'fa fa-coffee';
+    case '6': iconstate = "class='fa fa-coffee' title='Uống'";
       break;
-    case '7': iconstate = 'fa fa-eye';
+    case '7': iconstate = "class='fa fa-eye' title='Ngắm cảnh'";
       break;
-    case '8': iconstate = 'fa fa-users';
+    case '8': iconstate = "class='fa fa-users' title='Hội họp'";
       break;
-    case '9': iconstate = 'fa fa-user-o';
+    case '9': iconstate = "class='fa fa-user-o' title='Tự do'";
       break;
   }
   var n=lats.length-1;
-  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a title='"+subaddress[m]+"' onclick='setCenterMyLocation("+n+")' href='#''><i class='fa fa-circle-o'></i> "+subaddress[m]+"<span id='lacatTypes' class='label label-success'><i class='"+iconstate+"'></i></span></a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a title='"+subaddress[m]+"' onclick='setCenterMyLocation("+n+")'><i class='fa fa-circle-o'></i> <span class='hidden-17'>"+subaddress[m]+"</span></a><span id='lacatTypes' class='label label-success'><i "+iconstate+"></i></span><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
   setMapMyMarker(n,m);
 }
 function deleteElement(n){
@@ -236,7 +236,7 @@ function setMapMyMarker(i,m) {
     var st = startTimes[i];
     var et = endTimes[i];
     var n = notes[i];
-    infowindow.setContent("<b>Địa chỉ:</b><br>"+addr+"<br><b>Thời gian bắt đầu: </b><br>"+st+"<br><b>Thời gian Kết thúc: </b><br><b>"+et+"<br>Ghi chú: </b><br>"+n+"<hr><div><button title='Ghi chú' onclick='' class='buttons'><i class='fa fa-pencil fa-lg'></i></button></div>");
+    infowindow.setContent("<b>Địa chỉ:</b><br>"+addr+"<br><b>Thời gian bắt đầu: </b><br>"+st+"<br><b>Thời gian Kết thúc: </b><br>"+et+"<br><b>Ghi chú: </b><br>"+n+"<hr><div><button title='Ghi chú' onclick='' class='buttons'><i class='fa fa-pencil fa-lg'></i></button></div>");
     infowindow.open(map,marker);
     marker.addListener('click', function(){
       infowindow.open(map,marker);
@@ -284,6 +284,11 @@ function createMarkerNearbysearch(place) {
         map: map,
         position: place.geometry.location,
         icon: image
+    });
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'location': marker.getPosition()}, function(results, status){
+      address.push(results[0].formatted_address);
+      subaddress.push(results[0].address_components[0].short_name+', '+results[0].address_components[1].short_name);
     });
     markers.push(marker);
     var infowindow = new google.maps.InfoWindow({
@@ -354,6 +359,17 @@ function saveToDB(){
   
 }
 // -------------------------------
-$('.sortable').sortable({
-  items: ':not(.disabled)'
+$(document).ready(function(){
+  $('.sortable').sortable({
+    items: ':not(.disabled)'
+  });
+  var showChar17 = 17;
+  $('.hidden-17').each(function() {
+      var contentAddress = $(this).html();
+      if(contentAddress.length > showChar17) {
+          var c = contentAddress.substr(0, showChar17);
+          var html = c + ' ...';
+          $(this).html(html);
+      }
+  });
 });

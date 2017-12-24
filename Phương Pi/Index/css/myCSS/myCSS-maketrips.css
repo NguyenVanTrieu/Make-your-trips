@@ -21,9 +21,10 @@
   width: 100%;
 }
 .sortable li a{
-  width: 90%;
+  width: 80%;
   float: left;
   overflow: hidden;;
+  cursor: pointer;
 }
 .sortable li div{
   float: left;
@@ -52,7 +53,6 @@ li.highlight {
   float: left;
   color: #fff;
   padding-top: 7px;
-  margin-left: 1px;
 }
 .sortable li input[type=date]{
   width: 70%;
@@ -84,10 +84,10 @@ hr{
   z-index: 100;
 }
 #lacatTypes{
-  padding: 3px;
-  height: 100%;
-  float: right;
-  margin-top: 1px;
+  padding: 4px;
+  height: 60%;
+  float: left;
+  margin-top: 5px;
 }
 #iamhere{
   width: 28px;
