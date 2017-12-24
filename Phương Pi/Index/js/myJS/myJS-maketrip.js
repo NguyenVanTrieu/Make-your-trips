@@ -69,19 +69,30 @@ function createMarker(place) {
   var m = infowindows.length-1;
   var geocoder = new google.maps.Geocoder();
   marker.addListener('click', function() {
-    geocoder.geocode( { 'location': place}, function(results, status) {
-      address.push(results[0].formatted_address);
-      subaddress.push(results[0].address_components[0].short_name+', '+results[0].address_components[1].short_name);
+    geocoder.geocode( {'location': place}, function(results, status) {
       infowindows[m].setContent(results[0].formatted_address+"<hr><div><button title='Xóa' onclick='deleteMarker("+m+")' class='buttons'><i class='fa fa-times fa-lg'></i></button><button title='Ghim cờ' onclick='changeDefaultLocation("+m+")' class='buttons'><i class='fa fa-flag-o fa-lg'></i></button><button title='Ghi chú' onclick='setContentForm("+m+")' class='buttons'><i class='fa fa-pencil fa-lg'></i></button></div>");
       infowindows[m].open(map, marker);
     });
   });
+  geocoder.geocode({'location': place}, function(results, status) {
+    address.push(results[0].formatted_address);
+    subaddress.push(results[0].address_components[0].short_name+', '+results[0].address_components[1].short_name);
+  });
 }
-
+function getAddressAndsubaddress(){
+  for (var i = 0; i < infowindows.length; i++) {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'location': infowindows[i].getPosition()}, function(results, status){
+      address.push(results[0].formatted_address);
+      subaddress.push(results[0].address_components[0].short_name+', '+results[0].address_components[1].short_name);
+    });
+  }
+}
 function setContentForm(m){ 
   infowindows[m].setContent("<label>Giờ bắt đầu</label><input class='form-control' id='Start-time-"+m+"' type='datetime-local' name='Starttime' required='required'><br><label>Giờ kết thúc</label><input class='form-control' id='End-time-"+m+"' type='datetime-local' name='Endtime' required='required'><br><label>Ghi chú</label><input class='form-control' id='note-"+m+"' type='text' name='txt' required='required'><br><label>Trạng thái</label><select class='form-control' id='state'><option value='1'>Điểm bắt đầu</option><option value='2'>Điểm kết thúc</option><option value='3'>Nghỉ ngơi</option><option value='4'>Vui chơi</option><option value='5'>Ăn</option><option value='6'>Uống</option><option value='7'>Ngắm cảnh</option> <option value='8'>Tụ họp</option><option value='9'>Tự do</option></select></br><input type='submit' class='btn btn-danger' id='saveTodatabase' name='saveTodatabase' value='Thêm vào lịch trình của bạn' onclick='pushMarker("+m+")'>");
 }
 function pushMarker(m){
+  //getAddressAndsubaddress();
   lats.push(infowindows[m].getPosition().lat());
   lngs.push(infowindows[m].getPosition().lng());
   startTimes.push(document.getElementById("Start-time-"+m).value);
@@ -90,7 +101,6 @@ function pushMarker(m){
   states.push(document.getElementById('state').value);
   myaddress.push(address[m]);
   mysubaddress.push(subaddress[m]);
-  alert(mysubaddress);
   var iconstate;
   switch(document.getElementById('state').value){
     case '1': iconstate = 'fa fa-hourglass-start';
@@ -113,7 +123,7 @@ function pushMarker(m){
       break;
   }
   var n=lats.length-1;
-  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a onclick='setCenterMyLocation("+n+")' href='#''><i class='fa fa-circle-o'></i> "+startTimes[m]+"<span id='lacatTypes' class='label label-success'><i class='"+iconstate+"'></i></span></a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
+  $('#headListLocation').after("<li id='ListLocation-"+n+"'><a title='"+subaddress[m]+"' onclick='setCenterMyLocation("+n+")' href='#''><i class='fa fa-circle-o'></i> "+subaddress[m]+"<span id='lacatTypes' class='label label-success'><i class='"+iconstate+"'></i></span></a><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
   setMapMyMarker(n,m);
 }
 function deleteElement(n){
@@ -258,11 +268,10 @@ function searchObjectnearLocaltion(type){
     service.nearbySearch(request, callback);
   }
 function callback(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-        results.forEach(createMarkerNearbysearch);
-      }
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+      results.forEach(createMarkerNearbysearch);
   }
-
+}
 function createMarkerNearbysearch(place) {
   var image = {
       url: place.icon,
@@ -272,15 +281,14 @@ function createMarkerNearbysearch(place) {
       scaledSize: new google.maps.Size(25, 25)
     };
     var marker = new google.maps.Marker({
-          map: map,
-          position: place.geometry.location,
-          icon: image
-      });
+        map: map,
+        position: place.geometry.location,
+        icon: image
+    });
     markers.push(marker);
-
     var infowindow = new google.maps.InfoWindow({
       maxWidth: 200
-    });
+    });      
     infowindows.push(infowindow);
     var m = infowindows.length-1;
     marker.addListener('click', function() {

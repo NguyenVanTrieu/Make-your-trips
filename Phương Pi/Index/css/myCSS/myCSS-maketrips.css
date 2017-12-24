@@ -23,6 +23,7 @@
 .sortable li a{
   width: 90%;
   float: left;
+  overflow: hidden;;
 }
 .sortable li div{
   float: left;
