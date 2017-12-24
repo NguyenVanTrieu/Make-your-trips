@@ -28,6 +28,7 @@ function initMap() {
       position: {lat: 20.996004, lng: 105.808000},
       icon: flag
     });
+
     var iamhere = document.getElementById('iamhere');
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(iamhere);
     var input = document.getElementById('pac-input');
@@ -126,6 +127,7 @@ function pushMarker(m){
   $('#headListLocation').after("<li id='ListLocation-"+n+"'><a title='"+subaddress[m]+"' onclick='setCenterMyLocation("+n+")'><i class='fa fa-circle-o'></i> <span class='hidden-17'>"+subaddress[m]+"</span></a><span id='lacatTypes' class='label label-success'><i "+iconstate+"></i></span><div onclick='deleteElement("+n+")' title='Xóa vị trí này'><i class='fa fa-times fa-lg'></i></div></li>");
   setMapMyMarker(n,m);
 }
+
 function deleteElement(n){
   delete lats[n];
   delete lngs[n];
