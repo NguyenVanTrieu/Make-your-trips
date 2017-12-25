@@ -37,8 +37,7 @@
 											<div class="col-md-12">
 												Đăng nhập với
 												<div class="social-buttons">
-													<a href="{{url('redirect/fb')}}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
-													<a href="{{url('redirect/fb')}}" class="btn btn-danger"><i class="fa fa-google-plus"></i> Google+</a>
+													<a href="{{url('redirect/github')}}" class="btn btn-primary"><i class="fa fa-github"></i>Github</a>
 												</div>
 											</div>
 										</div>

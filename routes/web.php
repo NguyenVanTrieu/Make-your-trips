@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+Route::get('/callback/{social}', 'SocialAuthController@callback');
+
+Route::get('/login', function (){
+    return view('auth.login');
+});
+
+Route::get('trang-chu', function (){
+    return view('client.index');
+});
+Route::get('trang-chi-tiet', function (){
+    return view('client.info');
+});
+Route::get('tao-lich-trinh', function (){
+    return view('client.maketrip');
+});
