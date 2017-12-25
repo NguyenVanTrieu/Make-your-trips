@@ -31,3 +31,9 @@ Route::get('trang-chi-tiet', function (){
 Route::get('tao-lich-trinh', function (){
     return view('client.maketrip');
 });
+
+Route::group(['prefix'=>'admin'], function(){
+
+    Route::get('them-dia-diem', 'Admin\LocationController@getAddLocation');
+    Route::post('them-dia-diem', 'Admin\LocationController@postAddLocation');
+});

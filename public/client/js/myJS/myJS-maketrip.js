@@ -354,7 +354,17 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay,x,y) {
 function saveToDB(){
   var name = prompt('Tên tiến trình của bạn');
   if(name != ""){
-    alert(name);
+      var data = "{'address':'" + myaddress+ "','startTimes':'" + startTimes+ "','endTimes':'" + endTimes+ "', 'lats':'" + lats+ "', 'lngs':'" + lngs+ "'}";
+      console.log(data);
+          $.ajax({
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
+          url: "",
+          data: data,
+          success: function (result) {
+              alert('Tạo kế hoạch thành công thành công');
+          }
+      });
   }
   
 }
