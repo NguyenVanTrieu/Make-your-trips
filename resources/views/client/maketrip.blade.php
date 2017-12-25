@@ -173,7 +173,8 @@
       <span id="place-name"  class="title"></span><br>
       <span id="place-address"></span>
   </div>
-  <div class="content-wrapper" id="map"></div>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <div class="content-wrapper" id="map"></div>
 </div>
 </body>
 <script src="{{url('client/js/jquery-1.11.0.min.js')}}"></script>

@@ -37,3 +37,5 @@ Route::group(['prefix'=>'admin'], function(){
     Route::get('them-dia-diem', 'Admin\LocationController@getAddLocation');
     Route::post('them-dia-diem', 'Admin\LocationController@postAddLocation');
 });
+
+Route::post ('ajaxRequest', 'Client\PlanController@ajaxRequest');
