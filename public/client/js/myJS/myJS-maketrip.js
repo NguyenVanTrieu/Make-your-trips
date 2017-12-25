@@ -362,11 +362,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, x, y) {
 // -------------------------
 function saveToDB() {
     var name = prompt('Tên tiến trình của bạn');
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+
     if (name != "") {
         var data = [];
         for (i = 0; i < myaddress.length; i++) {
@@ -389,8 +385,11 @@ function saveToDB() {
          alert('Tạo kế hoạch thành công thành công');
          }
          });*/
-        var name = 'TRieu Nv';
-        var age = 12;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $.ajax({
             type: "POST",
             //async: true,

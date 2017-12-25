@@ -39,3 +39,8 @@ Route::group(['prefix'=>'admin'], function(){
 });
 
 Route::post ('ajaxRequest', 'Client\PlanController@ajaxRequest');
+/*Route::post ('ajaxRequest', function (Request $r){
+    if($r->ajax()){
+        return var_dump(Response::json(Request::all()));
+    }
+});*/

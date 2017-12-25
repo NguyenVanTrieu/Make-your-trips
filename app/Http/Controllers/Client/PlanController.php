@@ -9,10 +9,12 @@ class PlanController extends Controller
 {
 
 
-    public function ajaxRequest()
+    public function ajaxRequest(Request $r)
     {
         //$rs = json_decode($request->content(), true);
-        writeln(request()->all());
+        if($r->ajax()){
+            dump($r->all());
+        }
         return response()->json(array('msg'=> '123'), 200);
     }
 }
