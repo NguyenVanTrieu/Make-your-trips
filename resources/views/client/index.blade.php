@@ -37,7 +37,7 @@
 											<div class="col-md-12">
 												Đăng nhập với
 												<div class="social-buttons">
-													<a href="{{url('redirect/github')}}" class="btn btn-primary"><i class="fa fa-github"></i>Github</a>
+													<a href="{{url('redirect/github')}}" class="btn btn-primary"><i class="fa fa-github" aria-hidden="true"></i>Github</a>
 												</div>
 											</div>
 										</div>
